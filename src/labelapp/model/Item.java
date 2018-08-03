@@ -1,6 +1,7 @@
 package labelapp.model;
 
 public class Item {
+    public static final int FIELD_COUNT = 3;
     private String name, serialNumber, barcode;
 
     public Item(String name, String serialNumber, String barcode) {
