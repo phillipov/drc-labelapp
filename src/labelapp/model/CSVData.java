@@ -2,6 +2,7 @@ package labelapp.model;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.List;
 
 public class CSVData {
     private File file;
@@ -23,17 +24,23 @@ public class CSVData {
     }
 
     private static String[][] parseFile(File file) {
-        String[] dataRows = getRows(file);
-        ArrayList<String[]> data = new ArrayList<>(); //may need explicit instance with <String[]>
+        List<String> dataRows = getRows(file);
+        List<String[]> dataList = new ArrayList<>();
 
         for(String row : dataRows) {
-            data.add(parseRow(row));
+            dataList.add(parseRow(row));
         }
-        return (String[][]) (data.toArray());
+
+        String[][] dataArray = new String[dataList.size()][];
+        for (int i = 0; i < dataArray.length; i++) {
+            String[] row = dataList.get(i);
+            dataArray[i] = row;
+        }
+        return dataArray;
     }
 
-    private static String[] getRows(File file) {
-        ArrayList<String> dataRows = new ArrayList<>();
+    private static List<String> getRows(File file) {
+        List<String> dataRows = new ArrayList<>();
         try {
             BufferedReader br = new BufferedReader(new FileReader(file));
             String row;
@@ -44,7 +51,8 @@ public class CSVData {
         } catch (IOException ioEx) {
             ioEx.printStackTrace();
         }
-        return (String[]) dataRows.toArray();
+
+        return dataRows;
     }
 
     private static String[] parseRow(String row) {
