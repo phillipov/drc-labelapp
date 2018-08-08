@@ -23,7 +23,7 @@ public class CSVData {
         System.arraycopy(allData, 1, this.data, 0, this.data.length);
     }
 
-    private static String[][] parseFile(File file) {
+    private String[][] parseFile(File file) {
         List<String> dataRows = getRows(file);
         List<String[]> dataList = new ArrayList<>();
 
@@ -39,7 +39,7 @@ public class CSVData {
         return dataArray;
     }
 
-    private static List<String> getRows(File file) {
+    private List<String> getRows(File file) {
         List<String> dataRows = new ArrayList<>();
         try {
             BufferedReader br = new BufferedReader(new FileReader(file));
@@ -55,7 +55,7 @@ public class CSVData {
         return dataRows;
     }
 
-    private static String[] parseRow(String row) {
+    private String[] parseRow(String row) {
         row.replaceAll("\"", "");
         return row.split(",");
     }
